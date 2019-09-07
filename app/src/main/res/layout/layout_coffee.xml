@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,17 +8,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50sp"
         android:text="Quantity"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:layout_marginTop="50sp"
         android:textAppearance="?android:textAppearanceListItem" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="16sp">
+        android:layout_marginBottom="16sp"
+        android:gravity="center">
 
         <Button
             android:id="@+id/minus_button"
@@ -66,8 +67,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="16sp">
+        android:layout_marginBottom="16sp"
+        android:gravity="center">
 
 
         <Button
@@ -85,8 +86,34 @@
             android:layout_height="45sp"
             android:layout_marginLeft="10sp"
             android:text="Cancel"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="남은 시간 : "
+            android:textAlignment="viewEnd"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="90sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10sp"
+            android:text="10.00 초"
+            android:textAlignment="textEnd"
+            android:textSize="20sp" />
 
     </LinearLayout>
 

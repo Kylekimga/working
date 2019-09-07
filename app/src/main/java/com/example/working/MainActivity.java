@@ -4,16 +4,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mQuantityTextView;
     private TextView mResultTextView;
     private int mQuantity;
+    private TextView mTimer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mCancelButton = (Button) findViewById(R.id.cancel_button);
         mQuantityTextView = (TextView) findViewById(R.id.quantity_text);
         mResultTextView = (TextView) findViewById(R.id.result_text);
+        mTimer = (TextView) findViewById(R.id.timer);
         //초기화매서드
         initial();
         mMinusButton.setOnClickListener(new View.OnClickListener() {
@@ -138,8 +149,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Not ready yet", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_setting2:
+                sound();
                 return true;
             case R.id.action_setting3:
+                mytimer();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -147,4 +160,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    private void mytimer() {
+        CountDownTimer countDownTimer = new CountDownTimer(10000, 10){
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long s = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+                long ms = (millisUntilFinished - s*1000)/10;
+                mTimer.setText(""+String.format("%02d.%02d",s,ms)+"초");
+            }
+
+            @Override
+            public void onFinish() {
+                mTimer.setText("10.00초");
+            }
+        };
+        countDownTimer.start();
+    }
+
+    private void sound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.music1);
+        mediaPlayer.start();
+
+    }
+
+
 }
