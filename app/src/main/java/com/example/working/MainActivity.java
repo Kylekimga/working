@@ -2,6 +2,8 @@ package com.example.working;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     mQuantity--;
                     mQuantityTextView.setText("" + mQuantity);
                     displayresult();
-                }
-                else {
+                } else {
                     initial();
                     mQuantityTextView.setText("" + mQuantity);
                     Toast.makeText(MainActivity.this, "수량이 0개 입니다", Toast.LENGTH_SHORT).show();
@@ -76,16 +77,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String message = mResultTextView.getText().toString();
-                Toast.makeText(MainActivity.this, message + "\n주문되었습니다", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, message + "\n주문하겠습니다", Toast.LENGTH_SHORT).show();
+                String[] addresses = { "kkr0517@naver.com"};
+                composeEmail(addresses, "주문요청합니다", message );
                 initial();
             }
+
         });
 
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 initial();
-
                 Toast.makeText(MainActivity.this, "취소되었습니다", Toast.LENGTH_SHORT).show();
             }
         });
@@ -102,5 +105,16 @@ public class MainActivity extends AppCompatActivity {
         mQuantity = 0;
         mResultTextView.setText("지불 금액 : ");
         mQuantityTextView.setText("" + mQuantity);
+    }
+
+    public void composeEmail(String[] addresses, String subject, String text) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }
