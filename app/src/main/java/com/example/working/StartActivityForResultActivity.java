@@ -19,8 +19,8 @@ public class StartActivityForResultActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_for_result);
-    mValueEditText = findViewById(R.id.value_edit);
-    findViewById(R.id.submit_button).setOnClickListener(this);
+        mValueEditText = findViewById(R.id.value_edit);
+        findViewById(R.id.submit_button).setOnClickListener(this);
 
     }
 
@@ -29,7 +29,7 @@ public class StartActivityForResultActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, TargetActivity.class);
         intent.putExtra("value", mValueEditText.getText().toString());
         //주거니 받거니
-        startActivityForResult(intent,1000);
+        startActivityForResult(intent, 1000);
     }
 
     //받을 때 호출되는 콜백 매서드
