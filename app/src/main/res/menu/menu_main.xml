@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_setting"
+        android:icon="@drawable/pic1"
+        android:title="첫번째 설정"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_setting2"
+        android:icon="@drawable/pic2"
+        android:title="두번째 설정"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_setting3"
+        android:icon="@drawable/pic3"
+        android:title="숨은 세번째 설정"
+        app:showAsAction="never" />
+
+
+</menu>

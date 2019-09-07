@@ -1,11 +1,15 @@
 package com.example.working;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -78,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String message = mResultTextView.getText().toString();
                 Toast.makeText(MainActivity.this, message + "\n주문하겠습니다", Toast.LENGTH_LONG).show();
-                String[] addresses = { "kkr0517@naver.com"};
-                composeEmail(addresses, "주문요청합니다", message );
+                String[] addresses = {"kkr0517@naver.com"};
+                composeEmail(addresses, "주문요청합니다", message);
                 initial();
             }
 
@@ -116,5 +120,31 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    //메뉴를 붙이는 부분
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //아이템 메뉴 클릭할 때
+        switch (item.getItemId()) {
+            case R.id.action_setting:
+                Toast.makeText(this, "Not ready yet", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_setting2:
+                return true;
+            case R.id.action_setting3:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
     }
 }
