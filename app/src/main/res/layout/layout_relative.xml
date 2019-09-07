@@ -5,27 +5,37 @@
 
 
     <TextView
+        android:id="@+id/hello_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:background="#3F51B5"
         android:text="Hello"
-        android:textSize="35sp"
-        />
+        android:textSize="35sp" />
+    <TextView
+        android:id="@+id/welcom_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/hello_text"
+        android:layout_below="@+id/hello_text"
+        android:background="#3F51B9"
+        android:text="Welcome to"
+        android:textSize="35sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:background="#47B53F"
-        android:textSize="35sp"
-        android:text="가람의 첫번째 앱" />
+        android:text="가람의 첫번째 앱"
+        android:textSize="35sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#B53F7C"
+        android:text="김가람(28, 공군)"
         android:textSize="15sp"
-        android:text="김가람(28, 공군)" />
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
