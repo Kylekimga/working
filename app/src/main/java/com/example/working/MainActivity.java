@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String message = mResultTextView.getText().toString();
-                Toast.makeText(MainActivity.this, message + "\n주문하겠습니다", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, message + "\n주문하겠습니다", Toast.LENGTH_LONG).show();
                 String[] addresses = { "kkr0517@naver.com"};
                 composeEmail(addresses, "주문요청합니다", message );
                 initial();
