@@ -44,12 +44,13 @@
 
     </LinearLayout>
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16sp"
         android:layout_marginBottom="16sp"
-        android:text="Price"
+        android:text="Price : 3000원"
         android:textAllCaps="true"
         android:textAppearance="?android:textAppearanceMedium" />
 
@@ -59,15 +60,34 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16sp"
         android:layout_marginBottom="16sp"
-        android:text="결과"
+        android:text="지불 금액 : "
         android:textAppearance="?android:textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/order_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Order"
-        android:textAllCaps="false" />
+        android:gravity="center"
+        android:layout_marginBottom="16sp">
+
+
+        <Button
+            android:id="@+id/order_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Order"
+            android:textAllCaps="false" />
+
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="45sp"
+            android:layout_marginLeft="10sp"
+            android:text="Cancel"
+            android:textAllCaps="false"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>

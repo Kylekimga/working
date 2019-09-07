@@ -12,35 +12,95 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    public static final int QUANTITY_MIN = 1;
+    public static final int QUANTITY_MAX = 10;
+    public static final int COFFEE_PRICE = 3000;
     private Button mMinusButton;
     private Button mPlusButton;
+    private Button mOrderButton;
+    private Button mCancelButton;
     private TextView mQuantityTextView;
+    private TextView mResultTextView;
     private int mQuantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //초기화매서드
-        initial();
+
         //레이아웃 표시
         setContentView(R.layout.layout_coffee);
         // 레이아웃에서 특정 id를 인스턴스 변수와 연결
         mMinusButton = (Button) findViewById(R.id.minus_button);
         mPlusButton = (Button) findViewById(R.id.plus_button);
+        mOrderButton = (Button) findViewById(R.id.order_button);
+        mCancelButton = (Button) findViewById(R.id.cancel_button);
         mQuantityTextView = (TextView) findViewById(R.id.quantity_text);
-
+        mResultTextView = (TextView) findViewById(R.id.result_text);
+        //초기화매서드
+        initial();
         mMinusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //debug
                 Log.d(TAG, "사용자가 마이너스 버튼 클릭함");
-                Toast.makeText(MainActivity.this, "이미 수량이 0개 입니다", Toast.LENGTH_SHORT).show();
+                if (mQuantity > QUANTITY_MIN) {
+                    mQuantity--;
+                    mQuantityTextView.setText("" + mQuantity);
+                    displayresult();
+                }
+                else {
+                    initial();
+                    mQuantityTextView.setText("" + mQuantity);
+                    Toast.makeText(MainActivity.this, "수량이 0개 입니다", Toast.LENGTH_SHORT).show();
 
+                }
             }
         });
+
+        mPlusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //debug
+                Log.d(TAG, "사용자가 플러스 버튼 클릭함");
+                mQuantity++;
+                if (mQuantity > QUANTITY_MAX) {
+                    mQuantity = QUANTITY_MAX;
+                    Toast.makeText(MainActivity.this, "수량이 너무 많습니다", Toast.LENGTH_SHORT).show();
+                }
+                mQuantityTextView.setText("" + mQuantity);
+                displayresult();
+            }
+        });
+
+        mOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String message = mResultTextView.getText().toString();
+                Toast.makeText(MainActivity.this, message + "\n주문되었습니다", Toast.LENGTH_SHORT).show();
+                initial();
+            }
+        });
+
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initial();
+
+                Toast.makeText(MainActivity.this, "취소되었습니다", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void displayresult() {
+        String result = "지불 금액 : " + (COFFEE_PRICE * mQuantity)
+                + "원 입니다\n감사합니다";
+        mResultTextView.setText("" + result);
     }
 
     private void initial() {
         mQuantity = 0;
+        mResultTextView.setText("지불 금액 : ");
+        mQuantityTextView.setText("" + mQuantity);
     }
 }
