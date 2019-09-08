@@ -3,12 +3,14 @@ package com.example.working;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int QUANTITY_MIN = 1;
     public static final int QUANTITY_MAX = 10;
     public static final int COFFEE_PRICE = 3000;
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
     private Button mMinusButton;
     private Button mPlusButton;
     private Button mOrderButton;
@@ -152,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 sound();
                 return true;
             case R.id.action_setting3:
+
                 mytimer();
                 return true;
             default:
@@ -162,12 +167,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void mytimer() {
-        CountDownTimer countDownTimer = new CountDownTimer(10000, 10){
+        CountDownTimer countDownTimer = new CountDownTimer(10000, 10) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long s = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
-                long ms = (millisUntilFinished - s*1000)/10;
-                mTimer.setText(""+String.format("%02d.%02d",s,ms)+"초");
+                long ms = (millisUntilFinished - s * 1000) / 10;
+                mTimer.setText("" + String.format("%02d.%02d", s, ms) + "초");
             }
 
             @Override
@@ -184,5 +189,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
 
+
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+        //intervalTime 은 직전에 누른 시간고 현재 누른 시점 간 얼마만큼이 지났는지를 묻는 것임
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
+            super.onBackPressed();
+        } else {
+            backPressedTime = tempTime;
+            Toast.makeText(this, "한 번 더 뒤로가기를 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }
