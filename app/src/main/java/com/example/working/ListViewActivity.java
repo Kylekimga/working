@@ -19,8 +19,10 @@ import java.util.Map;
 public class ListViewActivity extends AppCompatActivity {
 
 
+    public static final long FINISH_INTERVAL_TIME = 2000;
     private ListView mListView;
     private ArrayList<Map<String, Object>> mDataList;
+    private long backPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
